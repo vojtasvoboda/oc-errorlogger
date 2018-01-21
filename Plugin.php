@@ -1,10 +1,10 @@
-<?php
-
-namespace VojtaSvoboda\ErrorLogger;
+<?php namespace VojtaSvoboda\ErrorLogger;
 
 use Backend\Facades\BackendAuth;
 use Config;
 use Log;
+use Monolog\Handler\SwiftMailerHandler;
+use Swift_Message;
 use VojtaSvoboda\ErrorLogger\Models\Settings;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\NativeMailerHandler;
@@ -63,22 +63,24 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        /** @var Logger $monolog */
         $monolog = Log::getMonolog();
 
         $this->setNativeMailerHandler($monolog);
+        $this->setSwiftMailerHandler($monolog);
         $this->setSlackHandler($monolog);
         $this->setSyslogHandler($monolog);
         $this->setNewrelicHandler($monolog);
     }
 
     /**
-     * Set native mailer handler
+     * Set native mailer handler.
      * 
      * Formatting lines example (use before pushHandler()):
      *   $formater = new LineFormatter("[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n");
      *   $handler->setFormatter($formater);
      *
-     * @param $monolog
+     * @param Logger $monolog
      *
      * @return Logger
      */
@@ -106,9 +108,51 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Set handler for Slack messaging app
+     * Set Swift mailer handler, where SwiftMailer instance is taken from OctoberCMS.
      *
-     * @param $monolog
+     * @param Logger $monolog
+     *
+     * @return Logger
+     */
+    private function setSwiftMailerHandler($monolog)
+    {
+        $required = ['swiftmailer_enabled', 'swiftmailer_email'];
+        if (!$this->checkRequiredFields($required)) {
+            return $monolog;
+        }
+
+        // disable when debug is true
+        $debug = Settings::get('swiftmailer_debug');
+        if ($debug & Config::get('app.debug')) {
+            return $monolog;
+        }
+
+        // get the mailer from OctoberCMS
+        $octoberMailer = $this->app->make('mailer');
+        $swiftMailer = $octoberMailer->getSwiftMailer();
+
+        // get message parameters
+        $email = Settings::get('swiftmailer_email');
+        $subject = Config::get('app.url') . ' - error report';
+        $from = Config::get('mail.from.address');
+        $level = Settings::get('swiftmailer_level', 100);
+
+        // prepare message
+        $message = new Swift_Message($subject);
+        $message->addFrom($from);
+        $message->addTo($email);
+
+        // register handler
+        $handler = new SwiftMailerHandler($swiftMailer, $message, $level);
+        $monolog->pushHandler($handler);
+
+        return $monolog;
+    }
+
+    /**
+     * Set handler for Slack messaging app.
+     *
+     * @param Logger $monolog
      *
      * @return Logger
      */
@@ -131,9 +175,9 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Set handler for Syslog
+     * Set handler for Syslog.
      *
-     * @param $monolog
+     * @param Logger $monolog
      *
      * @return Logger
      */
@@ -154,9 +198,9 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Set handler for New Relic
+     * Set handler for New Relic.
      *
-     * @param $monolog
+     * @param Logger $monolog
      *
      * @return Logger
      */
@@ -177,7 +221,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Check each required field if exist and not empty
+     * Check each required field if exist and not empty.
      *
      * @param array $fields
      *

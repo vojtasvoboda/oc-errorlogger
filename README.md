@@ -4,7 +4,7 @@
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/g/vojtasvoboda/oc-errorlogger-plugin.svg)](https://scrutinizer-ci.com/g/vojtasvoboda/oc-errorlogger-plugin/?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vojtasvoboda/oc-errorlogger-plugin/blob/master/LICENSE.md)
 
-Immediately sends an error from your OctoberCMS application to email, HipChat, Mandrill, NewRelic, Slack, Syslog, and more! Tested with the latest stable OctoberCMS build 349.
+Immediately sends an error from your OctoberCMS application to email, HipChat, Mandrill, NewRelic, Slack, Syslog, and more! Tested with the OctoberCMS build 430.
 
 - no plugin dependencies
 - easy setup, just fill your e-mail or API key
@@ -19,17 +19,27 @@ Immediately sends an error from your OctoberCMS application to email, HipChat, M
 
 ## Services
 
-_Available:_ Mailer handler, Slack handler, Syslog handler and New Relic handler.
+- Native PHP mailer handler
+- Swift Mailer handler (includes also SMTP, Mailgun, Mandrill, SES)
+- Slack handler
+- Syslog handler
+- New Relic handler
 
-_Waiting for implementation:_ CouchDB, Cube, ElasticSearch, FirePHP, Flowdock, HipChat, IFTTT, Mandrill, MongoDB, Redis and more.
-
-**!! Important notice !!** Mailer handler uses plain PHP `mail()` function, not Laravel Mail::send() function! So any backend mailing settings doesn't make any impact.
-
-**Feel free to send pullrequest!**
+Swift Mailer handler using OctoberCMS mail configuration. To setup this hanlder visit also Backend > Settings > Mail > Mail configuration.
 
 ## Contributing
 
 Please send Pull Request to master branch.
+
+_Handlers waiting for implementation:_ CouchDB, Cube, ElasticSearch, FirePHP, Flowdock, HipChat, IFTTT, MongoDB, Redis and more.
+
+## TODO
+
+- [ ] show button "Test" for trigger testing exception
+- [ ] add new tab with name '...' with listing all possible extensions (Sentry, Bugsnag)
+- [ ] can add more emails separated by comma
+
+**Feel free to send pullrequest!**
 
 ## License
 

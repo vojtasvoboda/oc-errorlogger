@@ -22,10 +22,16 @@ class Settings extends Model
     ];
 
     public $attributeNames = [
-        'nativemailer_email' => 'Developer email',
+        'nativemailer_email' => "Developer's email",
+        'swiftmailer_email' => "Developer's email",
     ];
 
     public static function getNativemailerLevelOptions()
+    {
+        return self::getErrorLevelOptions();
+    }
+
+    public static function getSwiftmailerLevelOptions()
     {
         return self::getErrorLevelOptions();
     }

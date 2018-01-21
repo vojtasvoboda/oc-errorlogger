@@ -18,7 +18,7 @@ return [
 
     'nativemailer' => [
         'tab' => [
-            'label' => 'Gestor de correo electrónico'
+            'label' => 'PHP Native Mailer',
         ],
         'enabled' => [
             'label' => 'Habilitar notificaciones por correo electrónico'
@@ -34,7 +34,28 @@ return [
         'debug' => [
             'label' => 'Deshabilitar cuando PHP esté en modo debug',
             'comment' => 'El envío de correos electrónicos será deshabilitado cuando debug es verdadero'
-        ]
+        ],
+    ],
+
+    'swiftmailer' => [
+        'tab' => [
+            'label' => 'October CMS mailer',
+        ],
+        'enabled' => [
+            'label' => 'Habilitar notificaciones por correo electrónico',
+        ],
+        'email' => [
+            'label' => 'E-mail del desarrador',
+            'comment' => 'El destinatario de las notificaciones por correo electrónico',
+        ],
+        'level' => [
+            'label' => 'Nivel de registro',
+            'comment' => 'El nivel mínimo de registro que provocará que este controlador se desencadene',
+        ],
+        'debug' => [
+            'label' => 'Deshabilitar cuando PHP esté en modo debug',
+            'comment' => 'El envío de correos electrónicos será deshabilitado cuando debug es verdadero',
+        ],
     ],
 
     'slack' => [

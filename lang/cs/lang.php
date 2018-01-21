@@ -18,23 +18,44 @@ return [
 
     'nativemailer' => [
         'tab' => [
-            'label' => 'E-mail'
+            'label' => 'PHP Native Mailer',
         ],
         'enabled' => [
-            'label' => 'Zapnout e-mailové notifikace'
+            'label' => 'Zapnout e-mailové notifikace',
         ],
         'email' => [
             'label' => 'E-mail vývojáře',
-            'comment' => 'E-mail na který budou chodit chyby a notifikace'
+            'comment' => 'E-mail na který budou chodit chyby a notifikace',
         ],
         'level' => [
             'label' => 'Úroveň logování',
-            'comment' => 'Minimální úroveň logování která bude zachycena a odeslána na e-mail'
+            'comment' => 'Minimální úroveň logování která bude zachycena a odeslána na e-mail',
         ],
         'debug' => [
             'label' => 'Vypnout při debugování',
-            'comment' => 'E-mailové notifikace se vypnout, pokud je nastaven parametr aplikace debug na true'
-        ]
+            'comment' => 'E-mailové notifikace se vypnout, pokud je nastaven parametr aplikace debug na true',
+        ],
+    ],
+
+    'swiftmailer' => [
+        'tab' => [
+            'label' => 'October CMS Mailer',
+        ],
+        'enabled' => [
+            'label' => 'Zapnout e-mailové notifikace',
+        ],
+        'email' => [
+            'label' => 'E-mail vývojáře',
+            'comment' => 'E-mail na který budou chodit chyby a notifikace',
+        ],
+        'level' => [
+            'label' => 'Úroveň logování',
+            'comment' => 'Minimální úroveň logování která bude zachycena a odeslána na e-mail',
+        ],
+        'debug' => [
+            'label' => 'Vypnout při debugování',
+            'comment' => 'E-mailové notifikace se vypnout, pokud je nastaven parametr aplikace debug na true',
+        ],
     ],
 
     'slack' => [

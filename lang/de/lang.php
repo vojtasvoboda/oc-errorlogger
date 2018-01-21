@@ -18,23 +18,44 @@ return [
 
     'nativemailer' => [
         'tab' => [
-            'label' => 'Mailer'
+            'label' => 'PHP Native Mailer',
         ],
         'enabled' => [
-            'label' => 'Email-Benachrichtigungen aktivieren'
+            'label' => 'Email-Benachrichtigungen aktivieren',
         ],
         'email' => [
             'label' => 'Email-Adresse des Entwicklers',
-            'comment' => 'Der Empfänger der Benachrichtigung'
+            'comment' => 'Der Empfänger der Benachrichtigung',
         ],
         'level' => [
             'label' => 'Logging-Level',
-            'comment' => 'Das minimale Logging-Level, bei dem diese Benachrichtigung ausgelöst wird'
+            'comment' => 'Das minimale Logging-Level, bei dem diese Benachrichtigung ausgelöst wird',
         ],
         'debug' => [
             'label' => 'Im Debug-Modus ausschalten',
-            'comment' => 'Im Debug-Modus werden keine Benachrichtigungen versendet'
-        ]
+            'comment' => 'Im Debug-Modus werden keine Benachrichtigungen versendet',
+        ],
+    ],
+
+    'swiftmailer' => [
+        'tab' => [
+            'label' => 'October CMS Mailer',
+        ],
+        'enabled' => [
+            'label' => 'Email-Benachrichtigungen aktivieren',
+        ],
+        'email' => [
+            'label' => 'Email-Adresse des Entwicklers',
+            'comment' => 'Der Empfänger der Benachrichtigung',
+        ],
+        'level' => [
+            'label' => 'Logging-Level',
+            'comment' => 'Das minimale Logging-Level, bei dem diese Benachrichtigung ausgelöst wird',
+        ],
+        'debug' => [
+            'label' => 'Im Debug-Modus ausschalten',
+            'comment' => 'Im Debug-Modus werden keine Benachrichtigungen versendet',
+        ],
     ],
 
     'slack' => [
