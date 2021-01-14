@@ -64,7 +64,15 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        $monolog = Log::getLogger();
+        try {
+            $monolog = Log::getLogger();
+        } catch (\Error $e) {
+            if (starts_with($e->getMessage(), "Call to undefined method Illuminate\Log\Writer::getLogger()")) {
+                $monolog = Log::getMonolog();
+            } else {
+                throw $e;
+            }
+        }
 
         $this->setNativeMailerHandler($monolog);
         $this->setSlackHandler($monolog);
