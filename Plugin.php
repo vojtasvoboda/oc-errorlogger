@@ -67,6 +67,7 @@ class Plugin extends PluginBase
         try {
             $monolog = Log::getLogger();
         } catch (\Error $e) {
+            // Fallback to Log::getMonolog() for October based on Laravel 5.5 and below.
             if (starts_with($e->getMessage(), "Call to undefined method Illuminate\Log\Writer::getLogger()")) {
                 $monolog = Log::getMonolog();
             } else {
