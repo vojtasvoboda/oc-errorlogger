@@ -64,7 +64,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        $monolog = Log::getMonolog();
+        $monolog = Log::getLogger();
 
         $this->setNativeMailerHandler($monolog);
         $this->setSlackHandler($monolog);
